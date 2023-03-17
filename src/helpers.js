@@ -64,3 +64,7 @@ export const formatCurrency = (amt) => {
     currency: "USD",
   });
 };
+
+export const formatDateToLocalString = (epoch) => {
+  return new Date(epoch).toLocaleDateString();
+};
