@@ -602,3 +602,8 @@ table a {
 .Toastify__toast-body {
   font-size: var(--fs-300);
 }
+
+#view-all-expenses {
+  display: flex;
+  justify-content: center;
+}
