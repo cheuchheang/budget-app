@@ -6,7 +6,7 @@ import AddExpenseForm from "../components/AddExpenseForm";
 import BudgetItem from "../components/BudgetItem";
 import Intro from "../components/Intro";
 import Table from "../components/Table";
-import { createBudget, createExpense, fetchData } from "../helpers";
+import { createBudget, createExpense, deleteItem, fetchData } from "../helpers";
 
 export const dashboardAction = async ({ request }) => {
   const data = await request.formData();
@@ -42,6 +42,18 @@ export const dashboardAction = async ({ request }) => {
       return toast.success(`Expense ${values.newExpense} created!`);
     } catch (error) {
       throw new Error("There was a problem creating your expense.");
+    }
+  }
+
+  if (_action === "deleteExpense") {
+    try {
+      deleteItem({
+        key: "expenses",
+        id: values.expenseId,
+      });
+      return toast.success("Expense deleted!");
+    } catch (error) {
+      throw new Error("There was a problem deleting your expense.");
     }
   }
 };
