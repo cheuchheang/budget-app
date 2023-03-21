@@ -26,8 +26,8 @@ export async function budgetLoader({ params }) {
 }
 
 export const budgetAction = async ({ request }) => {
-    const data = await request.formData();
-    const { _action, ...values } = Object.fromEntries(data);
+  const data = await request.formData();
+  const { _action, ...values } = Object.fromEntries(data);
 
   if (_action === "createExpense") {
     try {
@@ -42,20 +42,18 @@ export const budgetAction = async ({ request }) => {
     }
   }
 
-    if (_action === "deleteExpense") {
-      try {
-        deleteItem({
-          key: "expenses",
-          id: values.expenseId,
-        });
-        return toast.success("Expense deleted!");
-      } catch (error) {
-        throw new Error("There was a problem deleting your expense.");
-      }
+  if (_action === "deleteExpense") {
+    try {
+      deleteItem({
+        key: "expenses",
+        id: values.expenseId,
+      });
+      return toast.success("Expense deleted!");
+    } catch (error) {
+      throw new Error("There was a problem deleting your expense.");
     }
-  };
-
-  
+  }
+};
 
 const BudgetPage = () => {
   const { budget, expenses } = useLoaderData();
@@ -63,11 +61,11 @@ const BudgetPage = () => {
   return (
     <div className="grid-lg" style={{ "--accent": budget.color }}>
       <h1 className="h2">
-        <span className="accent">{budget.name}</span>
+        <span className="accent">{budget.name}</span>{' '}
         Overview
       </h1>
       <div className="flex-lg">
-        <BudgetItem budget={budget} />
+        <BudgetItem budget={budget} showDelete={true} />
         <AddExpenseForm budgets={[budget]} />
       </div>
       {expenses && expenses.length > 0 && (
